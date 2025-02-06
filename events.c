@@ -33,9 +33,9 @@ int	key_handler(int keysym, t_fractal *fractal)
 		fractal->shift_y -= (0.5 * fractal->zoom);
 	else if (keysym == XK_Down)
 		fractal->shift_y += (0.5 * fractal->zoom);
-	else if (keysym == XK_plus)
+	else if (keysym == XK_plus || keysym == 93)
 		fractal->iterations_definition += 10;
-	else if (keysym == XK_minus)
+	else if (keysym == XK_minus || keysym == 47)
 		fractal->iterations_definition -= 10;
 	fractal_render(fractal);
 	return (0);
