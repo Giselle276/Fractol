@@ -47,7 +47,10 @@ void	handle_pixel( int x, int y, t_fractal *fractal)
 	mandel_vs_julia(&z, &c, fractal);
 	while (i < fractal->iterations_definition)
 	{
-		z = sum_complex(square_complex(z), c);
+		if (!ft_strncmp(fractal->name, "tricorn", 7))
+			z = tricorn(z, c);
+		else
+			z = sum_complex(square_complex(z), c);
 		if ((z.x * z.x) + (z.y * z.y) > fractal->escape_value)
 		{
 			color = map(i, STEEL_BLUE, CHARCOAL_GREY,
@@ -55,7 +58,7 @@ void	handle_pixel( int x, int y, t_fractal *fractal)
 			my_pixel_put(x, y, &fractal->img, color);
 			return ;
 		}
-		i++;
+		++i;
 	}
 	my_pixel_put(x, y, &fractal->img, MIDNIGHT_BLUE);
 }
