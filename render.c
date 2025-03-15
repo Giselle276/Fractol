@@ -34,12 +34,32 @@ void	mandel_vs_julia(t_complex *z, t_complex *c, t_fractal *fractal)
 	}
 }
 
+void	color_pixel(int i, int x, int y, t_fractal *fractal)
+{
+	int			color;
+
+	color = map(i, STEEL_BLUE, CHARCOAL_GREY,
+			fractal->iterations_definition);
+	if (fractal->color_scheme == 0)
+		color = map(i, STEEL_BLUE, CHARCOAL_GREY,
+				fractal->iterations_definition);
+	else if (fractal->color_scheme == 1)
+		color = map(i, STEEL_BLUE, INDIGO,
+				fractal->iterations_definition);
+	else if (fractal->color_scheme == 2)
+		color = map(i, STEEL_BLUE, SADDLE_BROWN,
+				fractal->iterations_definition);
+	else if (fractal->color_scheme == 3)
+		color = map(i, STEEL_BLUE, DIM_GRAY,
+				fractal->iterations_definition);
+	my_pixel_put(x, y, &fractal->img, color);
+}
+
 void	handle_pixel( int x, int y, t_fractal *fractal)
 {
 	t_complex	z;
 	t_complex	c;
 	int			i;
-	int			color;
 
 	i = 0;
 	z.x = (map(x, -2, +2, WIDTH) * fractal->zoom) + fractal->shift_x;
@@ -53,9 +73,7 @@ void	handle_pixel( int x, int y, t_fractal *fractal)
 			z = sum_complex(square_complex(z), c);
 		if ((z.x * z.x) + (z.y * z.y) > fractal->escape_value)
 		{
-			color = map(i, STEEL_BLUE, CHARCOAL_GREY,
-					fractal->iterations_definition);
-			my_pixel_put(x, y, &fractal->img, color);
+			color_pixel(i, x, y, fractal);
 			return ;
 		}
 		++i;

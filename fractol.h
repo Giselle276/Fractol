@@ -63,6 +63,7 @@ typedef struct s_fractal
 	double	zoom;
 	double	julia_x;
 	double	julia_y;
+	int		color_scheme;
 }	t_fractal;
 
 int			ft_strncmp(const char *s1, const char *s2, size_t n);

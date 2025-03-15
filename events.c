@@ -37,6 +37,13 @@ int	key_handler(int keysym, t_fractal *fractal)
 		fractal->iterations_definition += 10;
 	else if (keysym == XK_minus || keysym == 47)
 		fractal->iterations_definition -= 10;
+	else if (keysym == XK_c)
+		fractal->color_scheme = (fractal->color_scheme + 1) % 4;
+	else if (keysym == XK_r)
+	{
+		fractal->color_scheme = 0;
+		fractal->iterations_definition = 42;
+	}
 	fractal_render(fractal);
 	return (0);
 }
