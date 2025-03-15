@@ -85,5 +85,6 @@ int			key_handler(int keysym, t_fractal *fractal);
 int			mouse_handler(int button, int x, int y, t_fractal *fractal);
 int			ft_isdigit(int c);
 t_complex	tricorn(t_complex z, t_complex c);
+void		color_pixel(int i, int x, int y, t_fractal *fractal);
 
 #endif
